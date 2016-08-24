@@ -1,0 +1,42 @@
+### import time as t
+import csv
+import sys
+from keras.models import Sequential
+from keras.layers import Dense, Flatten, Merge
+from keras.layers import Dropout, Activation
+from keras.layers import Convolution1D, MaxPooling1D
+from keras.regularizers import l2, activity_l2
+from keras.optimizers import RMSprop, SGD, Adam, Adadelta
+import keras.callbacks
+
+
+try:
+    #Alight estimation model
+    model = Sequential() #model initialize
+    model.add(Dense(70, input_shape=(70,))) #add convolution layer
+    model.add(Activation('relu')) #activation
+    model.add(Dropout(0.30)) #drop out
+
+    model.add(Dense(20))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.30)) #drop out
+
+    model.add(Dense(5))
+    model.add(Activation('softmax'))
+
+    adadelta = Adadelta(lr = 1.0, rho = 0.95, epsilon = 1e-08)
+    model.compile(loss='categorical_crossentropy', optimizer=adadelta)
+
+
+    #fit
+    filepath='F:\\Jae\\modelDNN_0819_17.out'
+    earlyStopping=keras.callbacks.EarlyStopping(monitor='val_loss', patience=0, verbose=0, mode='auto')
+    modelCheckpoint=keras.callbacks.ModelCheckpoint(filepath, monitor='val_loss', verbose=0, save_best_only=True, mode='auto')
+    #model.load_weights('F:\\Jae\\modelDNN_0819_14.out')
+    model.fit(train_X, train_Y, batch_size=1000, nb_epoch=500, validation_split=0.15, callbacks=[modelCheckpoint])
+    sys.stdout.flush()
+
+except ValueError:
+    print ('I/O error!')
+
+    
