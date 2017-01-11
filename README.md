@@ -1,5 +1,5 @@
 # ML-in-Urban-Engineering
-## Machine learning for Urban Engineering, especially in Transportation field.
+## Machine learning for Urban Engineering, especially in Transportation Planning field.
 ===========================================================================
 Lab for Big-Data Appications in Public Sector
 Chung-Ang University Graduate School, Dept. of Transportation Planning, Laboratory of Big data for Public Field
